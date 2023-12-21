@@ -12,11 +12,12 @@ const emit = defineEmits(["transactionSubmitted"]);
 const onSubmit = () => {
   if (!text.value || !amount.value) {
     toast.error("Both Fields Must Be Filled!");
+    return;
   }
 
   const transactionData = {
     text: text.value,
-    amount: amount.value,
+    amount: parseFloat(amount.value),
   };
 
   emit("transactionSubmitted", transactionData);

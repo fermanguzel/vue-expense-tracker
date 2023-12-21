@@ -9,7 +9,11 @@ const props = defineProps<{
   }>;
 }>();
 
-const deleteTransaction = (id: number) => {};
+const emit = defineEmits(["transactionDeleted"]);
+
+const deleteTransaction = (id: number) => {
+  emit("transactionDeleted", id);
+};
 </script>
 
 <template>
@@ -18,7 +22,7 @@ const deleteTransaction = (id: number) => {};
     <li
       v-for="transaction in transactions"
       :key="transaction.id"
-      :class="{ minus: transaction.amount < 0, plus: transaction.amount >= 0 }"
+      :class="transaction.amount < 0 ? 'minus' : 'plus'"
     >
       {{ transaction.text }}
       <span>€{{ transaction.amount }}</span>
